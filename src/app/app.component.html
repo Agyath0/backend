@@ -1,0 +1,22 @@
+<header class="header">
+  <h2>Event Management System</h2>
+  <nav *ngIf="role" class="nav-links">
+    <a *ngIf="role === 'admin'" routerLink="/admin/events">Events</a>
+    <a *ngIf="role === 'admin'" routerLink="/admin/categories">Categories</a>
+    <a *ngIf="role === 'admin'" routerLink="/admin/venues">Venues</a>
+    <a *ngIf="role === 'admin'" routerLink="/admin/sponsors">Sponsors</a>
+    <a *ngIf="role === 'user'" routerLink="/user/events">User Events</a>
+    <a *ngIf="role === 'user'" routerLink="/user/feedback">Feedback</a>
+
+    
+    <button (click)="logout()">Logout</button>
+  </nav>
+</header>
+
+<main class="main-container">
+  <router-outlet></router-outlet>
+</main>
+<footer class="footer">
+  <h6>TCET-2025</h6>
+</footer>
+

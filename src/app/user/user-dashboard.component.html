@@ -1,0 +1,41 @@
+<h2>User Dashboard</h2>
+
+<div class="categories">
+  <button *ngFor="let cat of categories" (click)="filterEvents(cat.categoryId)">
+    {{ cat.description }}
+  </button>
+</div>
+
+<div class="events" *ngIf="events.length">
+  <div *ngFor="let event of events" class="event-card">
+    <h4>{{ event.name }}</h4>
+    <p>{{ event.description }}</p>
+    <button (click)="openRegistrationForm(event.eventId)">Register</button>
+  </div>
+</div>
+
+<!-- Registration Form -->
+ 
+<div *ngIf="showRegistrationForm" class="form-box">
+  <h3>Register for Event</h3>
+  <input [(ngModel)]="registration.name" placeholder="Name" />
+  <input [(ngModel)]="registration.phone" placeholder="Phone" />
+  <input [(ngModel)]="registration.email" placeholder="Email" />
+  <button (click)="submitRegistration()">Submit</button>
+  <button (click)="cancelRegistration()" class="cancel-btn">Cancel</button>
+</div>
+
+<!-- Feedback Section -->
+<!-- <div class="feedback-section">
+  <button (click)="openFeedbackForm()">Give Feedback</button>
+</div>
+
+<div *ngIf="showFeedbackForm" class="form-box">
+  <h3>Feedback</h3>
+  <input [(ngModel)]="feedback.name" name="name" placeholder="Name" />
+  <input [(ngModel)]="feedback.email" name="email" placeholder="Email" />
+  <textarea [(ngModel)]="feedback.comments" name="comments" placeholder="Comments"></textarea>
+  <button (click)="submitFeedback()">Submit</button>
+  <button (click)="cancelFeedback()" class="cancel-btn">Cancel</button>
+</div> -->
+

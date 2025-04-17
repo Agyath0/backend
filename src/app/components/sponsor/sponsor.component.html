@@ -1,0 +1,31 @@
+<body>
+<h2>Sponsors</h2>
+
+<form [formGroup]="sponsorForm" (ngSubmit)="onSubmit()">
+  <input formControlName="name" placeholder="Sponsor Name" />
+  <input formControlName="description" type="text" placeholder="description" />
+  <button type="submit">{{ editingSponsorId ? 'Update' : 'Add' }} Sponsor</button>
+  <button type="button" (click)="resetForm()">Reset</button>
+</form>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sponsor of sponsors">
+      <td>{{ sponsor.sponsorId }}</td>
+      <td>{{ sponsor.name }}</td>
+      <td>{{ sponsor.description }}</td>
+      <td class="action">
+        <button (click)="editSponsor(sponsor)">Edit</button>
+        <button (click)="deleteSponsor(sponsor.sponsorId)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>

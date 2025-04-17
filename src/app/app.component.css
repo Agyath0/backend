@@ -1,0 +1,55 @@
+  .footer {
+    color: black;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 16px;
+  } 
+  .header {
+    background-image: url(https://unbounce.com/photos/Gradient-Background.png);
+    background-size: cover;
+    color: black;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 768px) {
+  .nav-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  }
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    background-color: #555;
+  }
+  
+  .nav-links button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-links button:hover {
+    background-color: #d32f2f;
+  }
+  
+  .main-container {
+    padding: 20px;
+  }
+  

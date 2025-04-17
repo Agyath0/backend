@@ -1,0 +1,123 @@
+<div class="marquee-container">
+  <div class="marquee-text">👋 Welcome Admin! 🎉</div>
+</div>
+<div class="table-container" *ngIf="events.length > 0">
+    <h3>Event List</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Event ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Category</th>
+          <th>Venue</th>
+          <th>Sponsor</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of events">
+          <td>{{ event.eventId }}</td>
+          <td>{{ event.name }}</td>
+          <td>{{ event.description }}</td>
+          <td>{{ event.date }}</td>
+          <td>{{ event.time }}</td>
+          <td>{{ event.category.description }}</td>
+          <td>{{ event.venue.venueId }}</td>
+          <td>{{ event.sponsor.sponsorId }}</td>
+          <td class="actions" >
+            <button (click)="editEvent(event)" class="btn btn-sm btn-warning">
+              <i class="bi bi-pencil"></i> Edit
+            </button>
+            <button (click)="deleteEvent(event.eventId)" class="btn btn-sm btn-danger">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+            <button (click)="showRegistrations(event.eventId)">Registrations</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<!-- Registrations Table -->
+<div *ngIf="showRegTable && selectedRegistrations.length > 0" class="form-box">
+  <h3>Registered Users <button (click)="clearRegistrations()" class="close">Close</button></h3>
+  <table class="table2">
+    <thead>
+      <tr>
+        <th>Name</th><th>Email</th><th>Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reg of selectedRegistrations">
+        <td>{{ reg.name }}</td>
+        <td>{{ reg.email }}</td>
+        <td>{{ reg.phone }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- No registrations message -->
+<div *ngIf="showRegTable && selectedRegistrations.length === 0">
+  <div class="alert-box fade-out">
+    No registrations found for this event.
+  </div>
+</div>
+
+<div class="container">
+  <div class="form-container">
+    <h2>{{ editingEventId ? 'Edit Event' : 'Add Event' }}</h2>
+    <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+      <label for="name">Event Name</label>
+      <input type="text" id="name" formControlName="name" required>
+
+      <label for="description">Description</label>
+      <input type="text" id="description" formControlName="description" required>
+
+      <label for="date">Date</label>
+      <input type="date" id="date" formControlName="date" required>
+
+      <label for="time">Time</label>
+      <input type="time" id="time" formControlName="time" required>
+
+      <label for="category">Category</label>
+      <input type="number" id="category" formControlName="category" placeholder="assign categoryId" required>
+
+      <label for="venue">Venue</label>
+      <input type="number" id="venue" formControlName="venue" placeholder="assign venueId" required>
+
+      <label for="sponsor">Sponsor</label>
+      <input type="number" id="sponsor" formControlName="sponsor" placeholder="assign sponsorId" required>
+
+      <div class="button-group">
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-check-circle"></i>
+          {{ editingEventId ? 'Update' : 'Create' }}
+        </button>
+        <button type="button" (click)="resetForm()" *ngIf="editingEventId" class="btn btn-secondary">
+          <i class="bi bi-x-circle"></i> Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Toast Message -->
+  <div
+    class="toast-container position-fixed bottom-0 end-0 p-3"
+    style="z-index: 11"
+    *ngIf="toastMessage">
+    <div class="toast show text-white bg-success" role="alert">
+      <div class="d-flex">
+        <div class="toast-body">{{ toastMessage }}</div>
+        <button
+          type="button"
+          class="btn-close btn-close-white me-2 m-auto"
+          aria-label="Close"
+          (click)="toastMessage = ''"
+        ></button>
+      </div>
+    </div>
+  </div>
+</div>

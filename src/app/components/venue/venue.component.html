@@ -1,0 +1,33 @@
+<body>
+<h2>Venues</h2>
+
+<form [formGroup]="venueForm" (ngSubmit)="onSubmit()">
+  <input formControlName="venueId" placeholder="venueId" />
+  <input formControlName="location" placeholder="Location" />
+  <input type="number" formControlName="capacity" placeholder="Capacity" />
+  <button type="submit">{{ editingVenueId ? 'Update' : 'Add' }} Venue</button>
+  <button type="button" (click)="resetForm()">Reset</button>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Location</th>
+      <th>Capacity</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let venue of venues">
+      <td>{{ venue.venueId }}</td>
+      <td>{{ venue.location }}</td>
+      <td>{{ venue.capacity }}</td>
+      <td class="action">
+        <button (click)="editVenue(venue)">Edit</button>
+        <button (click)="deleteVenue(venue.venueId)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
